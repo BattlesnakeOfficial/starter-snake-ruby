@@ -1,0 +1,7 @@
+{
+  "name": "BattleSnake Ruby",
+  "description": "A simple BattleSnake AI written in Ruby.",
+  "repository": "https://github.com/battlesnakeio/starter-snake-ruby",
+  "website": "http://battlesnake.io",
+  "keywords": ["battlesnake"]
+}
