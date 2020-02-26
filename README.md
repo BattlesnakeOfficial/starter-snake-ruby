@@ -16,11 +16,11 @@ This AI client uses the Sinatra web framework for running your snake server.
 
 ## Running the Snake Locally
 
-1) [Fork this repo](https://github.com/battlesnakeio/starter-snake-ruby/fork).
+1) [Fork this repo](https://github.com/battlesnakeio/battlesnake-2-ruby/fork).
 
 2) Clone repo to your development environment:
 ```
-git clone git@github.com:<your github username>/starter-snake-ruby.git
+git clone git@github.com:<your github username>/battlesnake-2-ruby.git
 ```
 
 3) Install dependencies using [bundler](https://bundler.io/#getting-started):
