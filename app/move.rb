@@ -77,25 +77,25 @@ def chase_tail(data, directions)
   if head[:x] < tail[:x] and directions.include?(:left)
     directions.delete(:left)
     directions.push(:right)
-    directions = avoid_self(data, directions)
+    directions nakes(data, directions)
   end
 
   if head[:x] > tail[:x] and directions.include?(:right)
     directions.delete(:right)
     directions.push(:left)
-    directions = avoid_self(data, directions)
+    directions = avoid_snakes(data, directions)
   end
 
   if head[:y] < tail[:y] and directions.include?(:up)
     directions.delete(:up)
     directions.push(:down)
-    directions = avoid_self(data, directions)
+    directions = avoid_snakes(data, directions)
   end
 
   if head[:y] > tail[:y] and directions.include?(:down)
     directions.delete(:down)
     directions.push(:up)
-    directions = avoid_self(data, directions)
+    directions = avoid_snakes(data, directions)
   end
 
   directions
