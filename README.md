@@ -28,6 +28,9 @@ git clone git@github.com:<your github username>/battlesnake-2-ruby.git
 bundle install
 ```
 
+   - if you get an error saying you don't have the right ruby version, you can use [RVM](https://rvm.io/)
+   - once you have it, use `rvm install 2.5.0` then `rvm use 2.5.0` (it may prompt you to use 2.4.0, but use 2.5.0)
+
 4) Run local server:
 ```
 ruby app/app.rb
