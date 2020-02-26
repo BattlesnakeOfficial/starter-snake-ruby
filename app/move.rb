@@ -3,8 +3,7 @@
 def move(data)
   directions = [:up, :down, :left, :right]
   safe_directions = avoid_self(data, directions)
-  safer_directions = avoid_wall(data, safe_directions)
-  move = safer_directions.sample
+  move = safe_directions.sample
 
   health = data[:you][:health]
 
@@ -37,7 +36,8 @@ def avoid_self(data, directions)
   if body.any? right
     directions.delete(:right)
   end
-  directions
+
+  avoid_wall(data, directions)
 end
 
 def avoid_wall(data, directions)
