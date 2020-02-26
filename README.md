@@ -43,6 +43,17 @@ curl -XPOST -H 'Content-Type: application/json' -d '{ "hello": "world"}' http://
 ```
    - or visit [the URL](http://localhost:4567/start) in your browser and you should see a white screen with the text "Sinatra doesn’t know this ditty" and a microphone.
 
+6) Get the local game engine
+   - download `engine_0.2.25_Darwin_x86_64.tar.gz` (Darwin is for macOS) from here: https://github.com/battlesnakeio/engine/releases/tag/0.2.25 
+
+7) Start the engine:
+   - be in engine directory: `cd engine_0.2.25_Darwin_x86_64`
+   - run `./engine dev`
+   - you should now be able to visit the local game board here: http://localhost:3010/
+
+8) Start a game to test your snake:
+   - TBA
+
 
 ## Deploying to Heroku
 
