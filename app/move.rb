@@ -2,7 +2,7 @@
 # View docs at https://docs.battlesnake.com/snake-api for example payloads.
 def move(data)
   directions = [:up, :down, :left, :right]
-  safe_directions = avoid_self(data, directions)
+  safe_directions = avoid_snakes(data, directions)
   move = safe_directions.sample
 
   health = data[:you][:health]
@@ -15,63 +15,31 @@ def move(data)
   end
 end
 
-def avoid_self(data, directions)
+def avoid_snakes(data, directions)
   body = data[:you][:body]
-
-  snakes = data[:board][:snakes]
-  allSnakes = snakes.each
-
-  puts "SNAKES: #{snakes}"
-
   head = body.first
+  snakes = data[:board][:snakes]
+
   x = head[:x]
   y = head[:y]
   up = {:x=>x, :y=>y-1}
   down = {:x=>x, :y=>y+1}
   left = {:x=>x-1, :y=>y}
   right = {:x=>x+1, :y=>y}
-  if body.any? up
-    directions.delete(:up)
-  end
-  if body.any? down
-    directions.delete(:down)
-  end
-  if body.any? left
-    directions.delete(:left)
-  end
-  if body.any? right
-    directions.delete(:right)
-  end
 
-  avoid_wall(data, directions)
-end
-
-def avoid_others(data, directions)
-  body = data[:you][:body]
-  
-  snakes = data[:board][:snakes]
-  allSnakes = snakes.each
-
-  puts "SNAKES: #{allSnakes}"
-
-  head = body.first
-  x = head[:x]
-  y = head[:y]
-  up = {:x=>x, :y=>y-1}
-  down = {:x=>x, :y=>y+1}
-  left = {:x=>x-1, :y=>y}
-  right = {:x=>x+1, :y=>y}
-  if body.any? up
-    directions.delete(:up)
-  end
-  if body.any? down
-    directions.delete(:down)
-  end
-  if body.any? left
-    directions.delete(:left)
-  end
-  if body.any? right
-    directions.delete(:right)
+  snakes.each do |snake|
+    if body.include?(up) || snake[:body].include?(up)
+      directions.delete(:up)
+    end
+    if body.include?(down) || snake[:body].include?(down)
+      directions.delete(:down)
+    end
+    if body.include?(left) || snake[:body].include?(left)
+      directions.delete(:left)
+    end
+    if body.include?(right) || snake[:body].include?(right)
+      directions.delete(:right)
+    end
   end
 
   avoid_wall(data, directions)
