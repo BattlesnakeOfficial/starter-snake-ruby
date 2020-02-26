@@ -1,4 +1,4 @@
-# starter-snake-ruby
+# battlesnake-2-ruby
 
 A simple [Battlesnake AI](http://battlesnake.io) written in Ruby.
 
