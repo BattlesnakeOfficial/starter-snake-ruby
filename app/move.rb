@@ -2,5 +2,9 @@
 # View docs at https://docs.battlesnake.com/snake-api for example payloads.
 def move(board)
   puts board
-  { move: :up }
+  # Random move
+  { move: [:up, :down, :right, :left].sample }
+end
+
+def avoid_walls(board)
 end
