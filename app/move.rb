@@ -17,6 +17,43 @@ end
 
 def avoid_self(data, directions)
   body = data[:you][:body]
+
+  snakes = data[:board][:snakes]
+  allSnakes = snakes.each
+
+  puts "SNAKES: #{snakes}"
+
+  head = body.first
+  x = head[:x]
+  y = head[:y]
+  up = {:x=>x, :y=>y-1}
+  down = {:x=>x, :y=>y+1}
+  left = {:x=>x-1, :y=>y}
+  right = {:x=>x+1, :y=>y}
+  if body.any? up
+    directions.delete(:up)
+  end
+  if body.any? down
+    directions.delete(:down)
+  end
+  if body.any? left
+    directions.delete(:left)
+  end
+  if body.any? right
+    directions.delete(:right)
+  end
+
+  avoid_wall(data, directions)
+end
+
+def avoid_others(data, directions)
+  body = data[:you][:body]
+  
+  snakes = data[:board][:snakes]
+  allSnakes = snakes.each
+
+  puts "SNAKES: #{allSnakes}"
+
   head = body.first
   x = head[:x]
   y = head[:y]
