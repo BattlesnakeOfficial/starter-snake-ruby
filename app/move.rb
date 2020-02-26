@@ -6,18 +6,18 @@ def move(data)
   safer_directions = avoid_wall(data, safe_directions)
   move = safer_directions.sample
 
-  health = board[:you][:health]
+  health = data[:you][:health]
 
   if (health >= 90)
-    move = chase_tail(board, safe_directions).sample
+    move = chase_tail(data, safe_directions).sample
     { move: move }
   else
     { move: move }
   end
 end
 
-def avoid_self(board, directions)
-  body = board[:you][:body]
+def avoid_self(data, directions)
+  body = data[:you][:body]
   head = body.first
   x = head[:x]
   y = head[:y]
@@ -40,8 +40,8 @@ def avoid_self(board, directions)
   directions
 end
 
-def avoid_wall(board, directions)
-  body = board[:you][:body]
+def avoid_wall(data, directions)
+  body = data[:you][:body]
   head = body.first
   x = head[:x]
   y = head[:y]
@@ -64,33 +64,33 @@ def avoid_wall(board, directions)
   directions
 end
 
-def chase_tail(board, directions)
-  body = board[:you][:body]
+def chase_tail(data, directions)
+  body = data[:you][:body]
   head = body.first
   tail = body.last
 
   if head[:x] < tail[:x] and directions.include?(:left)
     directions.delete(:left)
     directions.push(:right)
-    directions = avoid_self(board, directions)
+    directions = avoid_self(data, directions)
   end
 
   if head[:x] > tail[:x] and directions.include?(:right)
     directions.delete(:right)
     directions.push(:left)
-    directions = avoid_self(board, directions)
+    directions = avoid_self(data, directions)
   end
 
   if head[:y] < tail[:y] and directions.include?(:up)
     directions.delete(:up)
     directions.push(:down)
-    directions = avoid_self(board, directions)
+    directions = avoid_self(data, directions)
   end
 
   if head[:y] > tail[:y] and directions.include?(:down)
     directions.delete(:down)
     directions.push(:up)
-    directions = avoid_self(board, directions)
+    directions = avoid_self(data, directions)
   end
 
   directions
