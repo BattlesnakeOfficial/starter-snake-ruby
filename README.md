@@ -35,6 +35,7 @@ bundle install
 ```
 ruby app/app.rb
 ```
+   - if this doesn't work, make sure you have run `rvm use 2.5.0` in the terminal pane you're running the server in first.
 
 5) Test your snake by sending a curl to the running snake
 ```
