@@ -7,9 +7,11 @@ require './app/move'
 use Rack::PostBodyContentTypeParser
 
 appearance = {
-  color: "#00FF00",
-  head_type: "regular",
-  tail_type: "regular",
+  'color': '#735DEC',
+  'secondary_color': '#E6E6FA',
+  'taunt': 'HISSSSSSsssssss',
+  'head_type': "smile",
+  'tail_type': "curled"
 }
 
 get '/' do
