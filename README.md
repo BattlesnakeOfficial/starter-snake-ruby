@@ -41,6 +41,8 @@ ruby app/app.rb
 ```
 curl -XPOST -H 'Content-Type: application/json' -d '{ "hello": "world"}' http://localhost:4567/start
 ```
+or visit [the URL](http://localhost:4567/start) in your browser and you should see a white screen with the text "Sinatra doesn’t know this ditty" and a microphone.
+
 
 ## Deploying to Heroku
 
