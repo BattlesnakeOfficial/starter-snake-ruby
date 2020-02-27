@@ -18,7 +18,6 @@ def readable_snek_data(data)
   return snek
 end
 
-
 def readable_board_data(data)
   board = {
     board: data[:board],
@@ -36,7 +35,7 @@ def move(data)
   move = safe_directions.sample
 
   if (snek[:health] >= 60)
-    move = chase_tail(snek, safe_directions).sample
+    move = chase_tail(data, safe_directions).sample
     { move: move }
   else
     { move: move }
@@ -93,12 +92,9 @@ def avoid_wall(data, directions)
 end
 
 def chase_tail(data, directions)
-  # body = data[:you][:body]
-  # head = body.first
-  # tail = body.last
-  # body = data[:body]
-  head = data[:body].first
-  tail = data[:body].last
+  body = data[:you][:body]
+  head = body.first
+  tail = body.last
 
   if head[:x] < tail[:x] and directions.include?(:left)
     directions.delete(:left)
