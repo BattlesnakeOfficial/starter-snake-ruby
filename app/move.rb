@@ -1,14 +1,42 @@
 # TODO: Implement your logic here!
 # View docs at https://docs.battlesnake.com/snake-api for example payloads.
+
+def readable_snek_data(data)
+  snek = {
+    snek: data[:you],
+    health: data[:you][:health],
+    body: data[:you][:body],
+    head: {
+      x: data[:you][:body][0][:x],
+      y: data[:you][:body][0][:y]
+    }
+    # tail: {
+    #   'x_horizontal': data[:you][:body].last[:x],
+    #   'y_vertical': data[:you][:body].last[:y]
+    # }
+  }
+  return snek
+end
+
+
+def readable_board_data(data)
+  board = {
+    board: data[:board],
+    width: data[:board][:width],
+    height: data[:board][:height],
+  }
+  return board
+end
+
 def move(data)
+  snek = readable_snek_data(data)
+  board = readable_board_data(data)
   directions = [:up, :down, :left, :right]
   safe_directions = avoid_self(data, directions)
   move = safe_directions.sample
 
-  health = data[:you][:health]
-
-  if (health >= 90)
-    move = chase_tail(data, safe_directions).sample
+  if (snek[:health] >= 60)
+    move = chase_tail(snek, safe_directions).sample
     { move: move }
   else
     { move: move }
@@ -65,9 +93,12 @@ def avoid_wall(data, directions)
 end
 
 def chase_tail(data, directions)
-  body = data[:you][:body]
-  head = body.first
-  tail = body.last
+  # body = data[:you][:body]
+  # head = body.first
+  # tail = body.last
+  # body = data[:body]
+  head = data[:body].first
+  tail = data[:body].last
 
   if head[:x] < tail[:x] and directions.include?(:left)
     directions.delete(:left)
@@ -94,5 +125,4 @@ def chase_tail(data, directions)
   end
 
   directions
-
 end
