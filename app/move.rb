@@ -2,20 +2,22 @@
 # View docs at https://docs.battlesnake.com/snake-api for example payloads.
 
 def readable_snek_data(data)
-  snek = {
-    snek: data[:you],
-    health: data[:you][:health],
-    body: data[:you][:body],
-    head: {
-      x: data[:you][:body][0][:x],
-      y: data[:you][:body][0][:y]
-    }
-    # tail: {
-    #   'x_horizontal': data[:you][:body].last[:x],
-    #   'y_vertical': data[:you][:body].last[:y]
+  snek = data[:you]
+  snek_body = snek[:body]
+  snek_data = {
+    snek: snek,
+    health: snek[:health],
+    body: snek_body,
+    head: snek_body.first,
+    head_x: snek_body.first[:x],
+    head_y: snek_body.first[:y],
+    tail: snek_body.last
+    # head_position: {
+    #   x: data[:you][:body][0][:x],
+    #   y: data[:you][:body][0][:y]
     # }
   }
-  return snek
+  return snek_data
 end
 
 def readable_board_data(data)
@@ -43,7 +45,9 @@ def move(data)
 end
 
 def avoid_obstacles(data, directions)
-  body = data[:you][:body]
+  snek = readable_snek_data(data)
+  board = readable_board_data(data)
+  body = snek[:body]
   head = body.first
   snakes = data[:board][:snakes]
 
@@ -70,37 +74,38 @@ def avoid_obstacles(data, directions)
   end
 
   directions
-
 end
 
 def chase_tail(data, directions)
-  body = data[:you][:body]
-  head = body.first
-  tail = body.last
+  snek = readable_snek_data(data)
+  board = readable_board_data(data)
+  # head_x = snek[:head][:x]
+  tail_x = snek[:tail][:x]
+  head_y = snek[:head][:y]
+  tail_y = snek[:tail][:y]
 
-  if head[:x] < tail[:x] and directions.include?(:left)
+  if snek[:head_x] < tail_x and directions.include?(:left)
     directions.delete(:left)
     directions.push(:right)
     directions = avoid_obstacles(data, directions)
   end
 
-  if head[:x] > tail[:x] and directions.include?(:right)
+  if snek[:head_x] > tail_x and directions.include?(:right)
     directions.delete(:right)
     directions.push(:left)
     directions = avoid_obstacles(data, directions)
   end
 
-  if head[:y] < tail[:y] and directions.include?(:up)
+  if head_y < tail_y and directions.include?(:up)
     directions.delete(:up)
     directions.push(:down)
     directions = avoid_obstacles(data, directions)
   end
 
-  if head[:y] > tail[:y] and directions.include?(:down)
+  if head_y > tail_y and directions.include?(:down)
     directions.delete(:down)
     directions.push(:up)
     directions = avoid_obstacles(data, directions)
   end
-
   directions
 end
