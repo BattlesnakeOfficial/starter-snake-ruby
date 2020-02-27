@@ -60,6 +60,12 @@ def avoid_obstacles(data, directions)
   left = { x: head_x - 1, y: head_y }
   right = { x: head_x + 1, y: head_y }
 
+  up_2 = { x: head_x, y: head_y - 2 }
+  down_2 = { x: head_x, y: head_y + 2 }
+  left_2 = { x: head_x - 2, y: head_y }
+  right_2 = { x: head_x + 2, y: head_y }
+
+  # This checks for letty, other snakes, and walls in each direction - if found, that direction is removed
   board[:snakes].each do |snake|
     if letty[:body].include?(up) || snake[:body].include?(up) || up[:y] == -1
       directions.delete(:up)
@@ -75,6 +81,60 @@ def avoid_obstacles(data, directions)
     end
   end
 
+  if directions.length > 1
+    board[:snakes].each do |snake|
+      if letty[:body].include?(up_2) || snake[:body].include?(up_2) || up_2[:y] == -1
+        directions.delete(:up)
+      end
+      if letty[:body].include?(down_2) || snake[:body].include?(down_2) || down_2[:y] == board[:height]
+        directions.delete(:down)
+      end
+      if letty[:body].include?(left_2) || snake[:body].include?(left_2) || left_2[:x] == -1
+        directions.delete(:left)
+      end
+      if letty[:body].include?(right_2) || snake[:body].include?(right_2) || right_2[:x] == board[:width]
+        directions.delete(:right)
+      end
+    end
+  end
+  # directions
+  if (letty[:health] <= 50)
+    seek_food(data, directions)
+  end
+
+  directions
+
+end
+
+def seek_food(data, directions)
+  letty = readable_letty_data(data)
+  board = readable_board_data(data)
+
+  head_x = letty[:head_x]
+  head_y = letty[:head_y]
+  up = { x: head_x, y: head_y - 1 }
+  down = { x: head_x, y: head_y + 1 }
+  left = { x: head_x - 1, y: head_y }
+  right = { x: head_x + 1, y: head_y }
+
+  if directions.length > 1
+    board[:snakes].each do |snake|
+      if board[:food].include?(up)
+        directions = [:up]
+      end
+      if board[:food].include?(down)
+        directions = [:down]
+      end
+      if board[:food].include?(left)
+        directions = [:left]
+      end
+      if board[:food].include?(right)
+        directions = [:right]
+      end
+    end
+  end
+  
+  puts "DIRECTIONS: #{directions}"
   directions
 end
 
