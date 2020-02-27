@@ -98,12 +98,95 @@ def avoid_obstacles(data, directions)
     end
   end
   # directions
-  if (letty[:health] <= 50)
+  if (letty[:health] <= 50 and letty[:health] > 20)
     seek_food(data, directions)
+  end
+  if (letty[:health] <= 20)
+    eat_closest_food(data,directions)
   end
 
   directions
 
+end
+
+def eat_closest_food(data,directions)
+  letty = readable_letty_data(data)
+  board = readable_board_data(data)
+  head_x = letty[:head_x]
+  head_y = letty[:head_y]
+  up = { x: head_x, y: head_y - 1 }
+  down = { x: head_x, y: head_y + 1 }
+  left = { x: head_x - 1, y: head_y }
+  right = { x: head_x + 1, y: head_y }
+
+  food_list = data[:board][:food]
+  closest_food_result = find_closest_food(data,food_list,directions)
+
+  puts closest_food_result
+
+  if (head_y == closest_food_result[:y] and directions.include?(:right) and head_x < closest_food_result[:x])
+    directions = [:right]
+    return directions
+  end
+  if (head_y == closest_food_result[:y] and directions.include?(:left) and head_x > closest_food_result[:x])
+    directions = [:right]
+    return directions
+  end
+  if (head_x == closest_food_result[:x] and directions.include?(:down) and head_y < closest_food_result[:y])
+    directions = [:right]
+    return directions
+  end
+  if (head_x == closest_food_result[:x] and directions.include?(:up) and head_y > closest_food_result[:y])
+    directions = [:right]
+    return directions
+  end
+  if directions.include?(:left) and head_x < closest_food_result[:x]
+    directions.delete(:left)
+  end
+  if directions.include?(:right) and head_x > closest_food_result[:x]
+    directions.delete(:left)
+  end
+  if directions.include?(:up) and head_y < closest_food_result[:y]
+    directions.delete(:up)
+  end
+  if directions.include?(:down) and head_y > closest_food_result[:y]
+    directions.delete(:down)
+  end
+  return directions
+end
+
+def find_closest_food(data,food_list,directions)
+
+  closest_food = nil
+  shortest_distance = 10000
+  letty = readable_letty_data(data)
+  board = readable_board_data(data)
+  puts "TEST"
+  head_x = letty[:head_x]
+  head_y = letty[:head_y]
+
+  i=0
+  for item in food_list
+    food_x = food_list[i][:x]
+    food_y = food_list[i][:y]
+    distance_x = head_x - food_x
+    distance_y = head_y - food_y
+
+    total_distance = Math.sqrt((distance_x**2)+(distance_y**2))
+
+    if closest_food==nil
+      shortest_distance = total_distance
+      closest_food = item
+    end
+
+    if total_distance < shortest_distance
+      shortest_distance = total_distance
+      closest_food = item
+    end
+    i=i+1
+  end
+
+  return closest_food
 end
 
 def seek_food(data, directions)
@@ -133,7 +216,7 @@ def seek_food(data, directions)
       end
     end
   end
-  
+
   puts "DIRECTIONS: #{directions}"
   directions
 end
