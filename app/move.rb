@@ -82,6 +82,10 @@ def avoid_obstacles(data, directions)
   end
 
   if directions.length > 1
+    head_on_collision(data, directions)
+  end
+
+  if directions.length > 1
     board[:snakes].each do |snake|
       if letty[:body].include?(up_2) || snake[:body].include?(up_2) || up_2[:y] == -1
         directions.delete(:up)
@@ -163,6 +167,54 @@ def chase_tail(data, directions)
     directions.delete(:down)
     directions.push(:up)
     directions = avoid_obstacles(data, directions)
+  end
+  directions
+end
+
+def head_on_collision(data, directions)
+  letty = readable_letty_data(data)
+  board = readable_board_data(data)
+  letty_size = letty[:body].length
+
+  head_x = letty[:head_x]
+  head_y = letty[:head_y]
+
+  our_possible_moves = [
+    { x: head_x, y: head_y - 1 },
+    { x: head_x, y: head_y + 1 },
+    { x: head_x - 1, y: head_y },
+    { x: head_x + 1, y: head_y }
+  ]
+
+  for i in 1..board[:snakes].length-1
+    snake = board[:snakes][i]
+    if snake[:body][0] != letty[:head]
+      if snake[:body].length >= letty_size
+        their_possible_moves = check_snake_head(snake[:body][0])
+        directions = remove_bad_directions(their_possible_moves, our_possible_moves, directions)
+      end
+    end
+  end
+  directions
+end
+
+def check_snake_head(head)
+  possible_moves = [
+    { x: head[:x], y: head[:y] - 1 },
+    { x: head[:x], y: head[:y] + 1 },
+    { x: head[:x] - 1, y: head[:y] },
+    { x: head[:x] + 1, y: head[:y] }
+  ]
+  possible_moves
+end
+
+def remove_bad_directions(their_possible_moves, our_possible_moves, directions)
+  direction_keys = {0 => :up, 1 => :down, 2 => :left, 3 => :right}
+  for i in 0..3 do
+    our_move = our_possible_moves[i]
+    if their_possible_moves.include?(our_move)
+      directions.delete(direction_keys[i])
+    end
   end
   directions
 end
