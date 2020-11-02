@@ -1,4 +1,3 @@
-**WARNING:** This Battlesnake project implements an older version of the [Battlesnake API](https://docs.battlesnake.com/references/api). While it's still a great starting point, some additional work is required to make your Battlesnake compatible with the latest version of the platform.
 
 # A simple [Battlesnake](http://play.battlesnake.com) written in Ruby.
 
@@ -6,7 +5,7 @@ This is a basic implementation of the [Battlesnake API](https://docs.battlesnake
 
 ### Technologies
 
-This Battlesnake uses [Ruby 2.6](https://www.ruby-lang.org/), [Sinatra](http://sinatrarb.com/), and [Heroku](https://heroku.com).
+This Battlesnake uses [Ruby 2.7](https://www.ruby-lang.org/), and [Heroku](https://heroku.com).
 
 ### Prerequisites
 
@@ -41,7 +40,7 @@ This Battlesnake uses [Ruby 2.6](https://www.ruby-lang.org/), [Sinatra](http://s
     ```
     If everything was successful, you should see the following text:
     ```
-    Your Battlesnake is alive!
+    {"apiversion":"1","author":"","color":"#888888","headType":"default","tailType":"default"}
     ```
 
 6. Optionally, you can view your server logs using the [Heroku logs command](https://devcenter.heroku.com/articles/logging#log-retrieval) `heroku logs --tail`. The `--tail` option will show a live feed of your logs in real-time.
@@ -74,22 +73,26 @@ Now you're ready to start customizing your Battlesnake and improving its algorit
 
 ### Changing Appearance
 
-Locate the `/start` endpoint inside [app/app.rb](app/app.rb#L22). You should see code that looks like this:
+Locate the `/` endpoint inside [app/app.rb](app/app.rb#L11). You should see code that looks like this:
 ```ruby
-  appearance = {
-    color: "#888888",
-    head_type: "regular",
-    tail_type: "regular",
+ appearance = {
+    apiversion: "1",        
+    author: "",           # TODO: Your Battlesnake Username
+    color: "#888888",     # TODO: Personalize
+    head_type: "default", # TODO: Personalize
+    tail_type: "default", # TODO: Personalize
   }
 ```
 
-This function is called every time a new game starts. Your response determines what your Battlesnake will look like in that game. See [Customizing Your Battlesnake](https://docs.battlesnake.com/snake-customization) for how to customize your Battlesnake's appearance using these values.
+This function is called by the game engine periodically to make sure your Battlesnake is healthy, responding correctly, and to determine how your Battlesnake will appear on the game board. See [Battlesnake Personalization](https://docs.battlesnake.com/references/personalization) for how to customize your Battlesnake's appearance using these values.
+
+Whenever you update these values, you can refresh your Battlesnake on [your profile page](https://play.battlesnake.com/me/) to use your latest configuration. Your changes should be reflected in the UI, as well as any new games created.
 
 ### Changing Behavior
 
 On every turn of each game your Battlesnake receives information about the game board and must decide its next move.
 
-Locate the `move` function inside [app/move.rb](app/move.py#L4). You should see code that looks like this:
+Locate the `move` function inside [app/move.rb](app/move.rb#L4). You should see code that looks like this:
 ```ruby
 def move(board)
   # Choose a random direction to move in
@@ -171,4 +174,4 @@ This will start the Battlesnake server on port 4567.
 
 All documentation is available at [docs.battlesnake.com](https://docs.battlesnake.com), including detailed Guides, API References, and Tips.
 
-You can also join the [Battlesnake Developer Community on Slack](https://play.battlesnake.com/slack). We have a growing community of Battlesnake developers of all skill levels wanting to help everyone succeed and have fun with Battlesnake :)
+You can also join the Battlesnake Developer Community on [Slack](https://play.battlesnake.com/slack) and [Discord](https://play.battlesnake.com/discord). We have a growing community of Battlesnake developers of all skill levels wanting to help everyone succeed and have fun with Battlesnake :)
