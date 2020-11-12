@@ -40,7 +40,7 @@ This Battlesnake uses [Ruby 2.7](https://www.ruby-lang.org/), and [Heroku](https
     ```
     If everything was successful, you should see the following text:
     ```
-    {"apiversion":"1","author":"","color":"#888888","headType":"default","tailType":"default"}
+    {"apiversion":"1","author":"","color":"#888888","head":"default","tail":"default"}
     ```
 
 6. Optionally, you can view your server logs using the [Heroku logs command](https://devcenter.heroku.com/articles/logging#log-retrieval) `heroku logs --tail`. The `--tail` option will show a live feed of your logs in real-time.
@@ -79,8 +79,8 @@ Locate the `/` endpoint inside [app/app.rb](app/app.rb#L11). You should see code
     apiversion: "1",        
     author: "",           # TODO: Your Battlesnake Username
     color: "#888888",     # TODO: Personalize
-    head_type: "default", # TODO: Personalize
-    tail_type: "default", # TODO: Personalize
+    head: "default",      # TODO: Personalize
+    tail: "default",      # TODO: Personalize
   }
 ```
 
