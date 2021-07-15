@@ -3,6 +3,16 @@
 
 This is a basic implementation of the [Battlesnake API](https://docs.battlesnake.com/snake-api). It's a great starting point for anyone wanting to program their first Battlesnake using Ruby. It comes ready to deploy to [Heroku](https://heroku.com), although you can use other cloud providers if you'd like.
 
+### Maintanance
+
+This is a community maintained Starter Project Battlesnake!
+
+Contribute to Open Source, and help keep this project up-to-date via pull request. Pull requests will be reviewed and merged by the [Battlesnake Official](https://github.com/BattlesnakeOfficial) team.
+
+Get involved in the Battlesnake community!
+* [Discord](https://play.battlesnake.com/discord)
+* [Twitch](https://www.twitch.tv/battlesnakeofficial)
+
 ### Technologies
 
 This Battlesnake uses [Ruby 2.7](https://www.ruby-lang.org/), and [Heroku](https://heroku.com).
