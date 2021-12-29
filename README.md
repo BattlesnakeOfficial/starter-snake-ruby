@@ -41,7 +41,7 @@ This Battlesnake uses [Ruby 2.7](https://www.ruby-lang.org/), and [Heroku](https
 
 4. [Deploy your Battlesnake code to Heroku](https://devcenter.heroku.com/articles/git#deploying-code).
     ```shell
-    git push heroku master
+    git push heroku main
     ```
 
 5. Open your new Heroku app in your browser.
