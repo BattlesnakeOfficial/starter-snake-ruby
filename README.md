@@ -139,7 +139,7 @@ After making changes, commit them using git and deploy your changes to Heroku.
 ```shell
 git add .
 git commit -m "update my battlesnake's appearance"
-git push heroku master
+git push heroku main
 ```
 
 Once Heroku has updated you can [create a new game](https://play.battlesnake.com/account/games/create/) with your Battlesnake to view your latest changes in action.
