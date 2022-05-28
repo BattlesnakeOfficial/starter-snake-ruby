@@ -37,13 +37,6 @@ This Battlesnake uses [Ruby 2.7](https://www.ruby-lang.org/), and [Heroku](https
    ```shell
    heroku create [YOUR-APP-NAME]
    ```
-   **Important:** The Starter Snake is built to use Ruby 2.7, but Heroku will default to Ruby 3.0 now as of May 2022.
-   You will want to add the below to your gemfile.
-
-```shell
-ruby '2.7.6'
-```
-
 Then run
 
 ```shell
