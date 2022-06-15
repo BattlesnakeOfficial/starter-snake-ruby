@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/all'
 
 # Turns a hash from { hi_there: true } to { "hiThere": true } to match engine

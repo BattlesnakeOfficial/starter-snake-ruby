@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rack'
 require 'rack/contrib'
 require 'sinatra'
@@ -11,11 +13,11 @@ use Rack::JSONBodyParser
 # TIP: If you open your Battlesnake URL in browser you should see this data
 get '/' do
   appearance = {
-    apiversion: "1",        
-    author: "",           # TODO: Your Battlesnake Username
-    color: "#888888",     # TODO: Personalize
-    head: "default",      # TODO: Personalize
-    tail: "default",      # TODO: Personalize
+    apiversion: '1',
+    author: '',           # TODO: Your Battlesnake Username
+    color: '#888888',     # TODO: Personalize
+    head: 'default',      # TODO: Personalize
+    tail: 'default' # TODO: Personalize
   }
 
   camelcase(appearance).to_json
@@ -25,8 +27,8 @@ end
 # rack.request.form_hash contains information about the game that's about to be played.
 # TODO: Use this function to decide how your snake is going to look on the board.
 post '/start' do
-  request = underscore(env['rack.request.form_hash'])
-  puts "START"
+  underscore(env['rack.request.form_hash'])
+  puts 'START'
   "OK\n"
 end
 
@@ -45,6 +47,6 @@ end
 # This function is called when a game your Battlesnake was in ends.
 # It's purely for informational purposes, you don't have to make any decisions here.
 post '/end' do
-  puts "END"
+  puts 'END'
   "OK\n"
 end

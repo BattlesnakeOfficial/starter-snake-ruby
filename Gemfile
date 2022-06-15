@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '2.7.5'
-gem 'sinatra'
+gem 'activesupport'
 gem 'json'
 gem 'rack-contrib'
-gem 'activesupport'
+gem 'rubocop'
+gem 'sinatra'
