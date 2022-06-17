@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+require_relative 'graph/board'
+
 # This function is called on every turn of a game. It's how your Battlesnake decides where to move.
 # Valid moves are "up", "down", "left", or "right".
-# TODO: Use the information in board to decide your next move.
-def move(board)
-  puts board
 
+def move(game)
+  puts Graph::Board.new(game[:board].merge({ you: game[:you] })).search
   # Choose a random direction to move in
   possible_moves = %w[up down left right]
   move = possible_moves.sample

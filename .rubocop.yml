@@ -21,3 +21,6 @@ Metrics/PerceivedComplexity:
 
 Lint/UnreachableLoop:
   Enabled: false
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false

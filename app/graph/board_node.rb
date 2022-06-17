@@ -6,11 +6,11 @@ require 'gastar'
 # Note: All attributes below are custom for this implementation and none are
 # needed nor used by the actual AStar seach algorithm. They're my domain atts.
 module Graph
-  class Node < AStarNode
+  class BoardNode < AStarNode
     attr_reader :type, :x, :y
 
     def initialize(type, x, y)
-      super
+      super()
       @type = type
       @x = x
       @y = y
