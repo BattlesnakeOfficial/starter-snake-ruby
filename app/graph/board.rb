@@ -5,6 +5,8 @@ require_relative 'board_node'
 
 module Graph
   class Board < AStar
+    attr_reader :graph
+
     def initialize(board_json)
       graph = build_graph(board_json)
       @start = find_my_head(board_json, graph)
@@ -13,7 +15,6 @@ module Graph
     end
 
     def search
-      pp @graph
       super(@start, @end)
     end
 
@@ -35,10 +36,10 @@ module Graph
         y_range.each do |y|
           ignore = false
           (points_to_ignore + food).flatten.each do |point|
-            ignore = point[:x] == x && point[:y] == y
+            ignore = (point[:x] == x && point[:y] == y)
             break if ignore
           end
-          board_nodes.append(BoardNode.new(:board, x, y))
+          board_nodes.append(BoardNode.new(:board, x, y)) unless ignore
         end
       end
 
@@ -62,7 +63,8 @@ module Graph
       food = board_json[:food]
       snakes = board_json[:snakes].map { |snake| snake[:body].append(snake[:head]) }
       hazards = board_json[:hazards]
-      [dimensions, food, (snakes + hazards).flatten]
+
+      [dimensions, food, (snakes + hazards).flatten.uniq]
     end
 
     def find_my_head(board_json, graph)
