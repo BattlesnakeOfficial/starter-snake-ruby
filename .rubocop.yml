@@ -1,2 +1,23 @@
 AllCops:
   NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Naming/MethodParameterName: 
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Lint/UnreachableLoop:
+  Enabled: false
