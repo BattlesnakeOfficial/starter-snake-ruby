@@ -15,7 +15,7 @@ Get involved in the Battlesnake community!
 
 ### Technologies
 
-This Battlesnake uses [Ruby 2.7](https://www.ruby-lang.org/), and [Heroku](https://heroku.com).
+This Battlesnake uses [Ruby 3.4.6](https://www.ruby-lang.org/), and [Heroku](https://heroku.com).
 
 ### Prerequisites
 
