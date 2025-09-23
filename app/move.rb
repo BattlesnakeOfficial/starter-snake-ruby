@@ -1,6 +1,6 @@
 # This function is called on every turn of a game. It's how your Battlesnake decides where to move.
 # Valid moves are "up", "down", "left", or "right".
-# TODO: Use the information in board to decide your next move.
+# TODO: Use the information in board to decide your next move. See https://docs.battlesnake.com/api/example-move for an example request.
 def move(board)
   puts board
 
