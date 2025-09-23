@@ -4,7 +4,7 @@ require 'sinatra'
 require './app/util'
 require './app/move'
 
-use Rack::PostBodyContentTypeParser
+use Rack::JSONBodyParser
 # This function is called when you register your Battlesnake on play.battlesnake.com
 # It controls your Battlesnake appearance and author permissions.
 # TIP: If you open your Battlesnake URL in browser you should see this data
